@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="銀髮族 AI 說故事走進校園資源班計畫 — 江昱德 × 林學賢 × 永力扶輪社 共同提案">
+<meta name="robots" content="noindex, nofollow">
+<title>銀髮族 說故事 × 走進校園資源班 · 提案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;500;700;900&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #F7F1E3; font-family: "Noto Sans TC", system-ui, sans-serif; color: #3A2E2A; }
+  *, *::before, *::after { box-sizing: border-box; }
+  .page-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    background: #F7F1E3;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(58,46,42,0.04) 31px, rgba(58,46,42,0.04) 32px);
+    box-shadow: 0 2px 40px rgba(58,46,42,0.08);
+  }
+  @media (max-width: 1080px) {
+    .page-wrap { box-shadow: none; }
+  }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+// ─── 提案資料 ──────────────────────────────────────────
+const PROPOSAL_DATA = {
+  title: "銀髮族 AI 說故事",
+  subtitle: "走進校園資源班計畫",
+  tagline: "讓阿公阿嬤、AI、孩子、學校,四方都受益的社區共學方案",
+  proposers: ["江昱德", "林學賢"],
+
+  pillars: [
+    {
+      key: "kids",
+      label: "資源班的孩子",
+      summary: "每天有一群沒辦法參加社團的孩子,被安排在同一間教室。",
+      detail: "有的情緒激烈、有的一句話講不出口、有的整個下午就是寫作業、看卡通。他們需要被傾聽,需要一個半小時專屬的舞台。",
+    },
+    {
+      key: "elders",
+      label: "銀髮族的舞台",
+      summary: "長輩擔任說故事的主角,每週一段三十分鐘。",
+      detail: "由長輩自己定主題、定節奏。內容可以是人生經歷、童年趣事,或一段親手改編過的繪本——他們不是被照顧的對象,而是主角。",
+    },
+    {
+      key: "ai",
+      label: "AI 的位置",
+      summary: "幫忙把故事修順、生成繪本、投影成舞台場景。",
+      detail: "讓準備變簡單、讓現場變流暢、讓故事變得更有趣。AI 是後台支援,不是現場直接給孩子用的工具。",
+    },
+  ],
+
+  layers: [
+    {
+      no: "01",
+      title: "長輩培力(事前)",
+      bullets: [
+        "一系列 4–6 堂的培力課程",
+        "教長輩用 AI 工具:給靈感、修順故事、用手機生成 AI 繪本",
+        "預演會碰到的學生狀況——挑戰、鬧、冷場",
+        "每位長輩搭配一位「AI 說故事老師」分身,平日練口條、找靈感",
+      ],
+    },
+    {
+      no: "02",
+      title: "現場執行(每週進班)",
+      bullets: [
+        "長輩主說,AI 是後台支援",
+        "視情況可投影 AI 生成畫面,當作繪本或戲劇場景,讓孩子有畫面感",
+        "結束後 5 分鐘讓孩子畫、寫、說一句感想",
+      ],
+    },
+    {
+      no: "03",
+      title: "成長追蹤(事後)",
+      bullets: [
+        "長輩遇到的問題、孩子的好回答、現場的好梗 → 收進共享知識庫",
+        "LINE 群、共學平台讓長輩之間互相支援",
+        "量化追蹤孩子的情緒狀態、人際互動、融入正常班級的進展",
+        "每學期出一份成果報告(學校、家長、補助單位)",
+      ],
+    },
+  ],
+
+  benefits: [
+    {
+      who: "對孩子",
+      sub: "資源班學生",
+      points: [
+        "多一個被傾聽、被看見的半小時",
+        "從故事中學習情緒管理、家人互動、人際技巧",
+        "目標:情緒能被控制、個性能改變、漸進融入正常班級或社團",
+      ],
+    },
+    {
+      who: "對長輩",
+      sub: "銀髮族",
+      points: [
+        "退休生活有意義、有舞台",
+        "持續學習新工具(AI),社交互動不中斷",
+        "「我能幫到孩子」帶來的療癒感與自我價值",
+        "不只是被照顧的對象,而是社會能力被擴大的主體",
+      ],
+    },
+    {
+      who: "對學校",
+      sub: "資源班 / 校方",
+      points: [
+        "不增加老師負擔——多一份外部支援",
+        "多一個跟社區、跟長者連結的入口",
+        "可作為學校特色項目(校慶、成果展、教育創新案例)",
+      ],
+    },
+    {
+      who: "對社區",
+      sub: "永力扶輪社 / 社區夥伴",
+      points: [
+        "代間共學的具體實踐",
+        "社區發展協會延伸新方向(校慶、行動劇、繪本展)",
+        "為其他學校、其他類型的長者活動建立可複製的模式",
+      ],
+    },
+  ],
+
+  roles: [
+    { role: "學校", duty: "提供場地、安排資源班時段、現場老師陪同、與家長溝通" },
+    { role: "永力扶輪社", duty: "統籌、補助申請、社友資源整合、與學校對口" },
+    { role: "江昱德老師", duty: "AI 工具設計、長輩培力課程、成長追蹤系統" },
+    { role: "銀髮長輩", duty: "主角(說故事人)" },
+    { role: "社區夥伴", duty: "視需要支援活動執行、家長端溝通" },
+  ],
+};
+
+// ─── 四方關係圖 SVG ──────────────────────────────────
+function FourWayDiagram({ palette }) {
+  const p = palette || {
+    kids: "#C96442",
+    elders: "#7A8B6F",
+    ai: "#3D5A6C",
+    school: "#D4A24C",
+    line: "#2C2823",
+    bg: "transparent",
+    text: "#2C2823",
+  };
+  return (
+    <svg viewBox="0 0 600 460" width="100%" style={{ display: "block", maxWidth: 560 }}>
+      <circle cx="300" cy="230" r="58" fill="#fff" stroke={p.line} strokeWidth="1.5" />
+      <text x="300" y="222" textAnchor="middle" fontFamily="Noto Serif TC, serif" fontSize="18" fontWeight="700" fill={p.text}>每週</text>
+      <text x="300" y="248" textAnchor="middle" fontFamily="Noto Serif TC, serif" fontSize="18" fontWeight="700" fill={p.text}>30 分鐘</text>
+
+      <g stroke={p.line} strokeWidth="1" strokeDasharray="3 4" opacity="0.4">
+        <line x1="300" y1="172" x2="300" y2="80" />
+        <line x1="358" y1="230" x2="500" y2="230" />
+        <line x1="300" y1="288" x2="300" y2="380" />
+        <line x1="242" y1="230" x2="100" y2="230" />
+      </g>
+
+      {[
+        { x: 300, y: 50, color: p.kids, label: "孩子", sub: "資源班" },
+        { x: 530, y: 230, color: p.elders, label: "長輩", sub: "說故事人" },
+        { x: 300, y: 410, color: p.school, label: "學校", sub: "場地 · 陪同" },
+        { x: 70, y: 230, color: p.ai, label: "AI", sub: "後台支援" },
+      ].map((n, i) => (
+        <g key={i}>
+          <circle cx={n.x} cy={n.y} r="48" fill={n.color} opacity="0.15" />
+          <circle cx={n.x} cy={n.y} r="38" fill={n.color} />
+          <text x={n.x} y={n.y - 2} textAnchor="middle" fontFamily="Noto Serif TC, serif" fontSize="17" fontWeight="700" fill="#fff">{n.label}</text>
+          <text x={n.x} y={n.y + 16} textAnchor="middle" fontFamily="Noto Sans TC, sans-serif" fontSize="10" fill="#fff" opacity="0.85">{n.sub}</text>
+        </g>
+      ))}
+
+      <text x="305" y="125" fontFamily="Noto Sans TC" fontSize="11" fill={p.text} opacity="0.6">被傾聽</text>
+      <text x="430" y="220" fontFamily="Noto Sans TC" fontSize="11" fill={p.text} opacity="0.6">有舞台</text>
+      <text x="305" y="345" fontFamily="Noto Sans TC" fontSize="11" fill={p.text} opacity="0.6">外部資源</text>
+      <text x="135" y="220" fontFamily="Noto Sans TC" fontSize="11" fill={p.text} opacity="0.6">把準備變簡單</text>
+    </svg>
+  );
+}
+
+// ─── 知識庫加大版 SVG ──────────────────────────────────
+function KnowledgeStackLG({ palette }) {
+  const p = palette;
+  return (
+    <svg viewBox="0 0 560 300" width="100%" style={{ display: "block" }}>
+      {[0, 1, 2, 3, 4].map((i) => {
+        const y = 230 - i * 28;
+        const w = 380 - i * 20;
+        const x = (560 - w) / 2;
+        const opacity = 0.35 + i * 0.16;
+        return (
+          <g key={i}>
+            <rect x={x} y={y} width={w} height="24" rx="2" fill={p.primary} opacity={opacity} />
+            <rect x={x + 16} y={y + 9} width="44" height="2.5" fill="#fff" opacity="0.5" />
+            <rect x={x + 66} y={y + 9} width="86" height="2.5" fill="#fff" opacity="0.4" />
+          </g>
+        );
+      })}
+      <g fontFamily="Noto Sans TC, sans-serif" fontSize="14" fill={p.text} opacity="0.75" fontWeight="500">
+        <text x="60" y="38">現場好題材</text>
+        <text x="220" y="28" textAnchor="middle">孩子的回應</text>
+        <text x="380" y="38">長輩的靈感</text>
+        <text x="510" y="38" textAnchor="end">老師的觀察</text>
+      </g>
+      <g stroke={p.line} strokeWidth="1" opacity="0.35" strokeDasharray="2 3">
+        <line x1="100" y1="50" x2="180" y2="105" />
+        <line x1="220" y1="40" x2="240" y2="105" />
+        <line x1="400" y1="50" x2="320" y2="105" />
+        <line x1="490" y1="50" x2="380" y2="105" />
+      </g>
+      <text x="280" y="124" textAnchor="middle" fontFamily="Noto Serif TC, serif" fontSize="17" fontWeight="700" fill={p.text}>共享知識庫</text>
+      <text x="280" y="290" textAnchor="middle" fontFamily="Noto Sans TC" fontSize="14" fill={p.text} opacity="0.7">上一次的累積 = 下一次的養分</text>
+    </svg>
+  );
+}
+
+// ─── 加大版折疊元件 ──────────────────────────────────
+function CollapsibleLG({ badge, title, children, defaultOpen, p }) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  return (
+    <div>
+      <button onClick={() => setOpen(!open)} style={{
+        width: "100%", textAlign: "left",
+        padding: "24px 28px",
+        background: open ? p.cream : "transparent",
+        border: "none", cursor: "pointer",
+        display: "flex", alignItems: "center", gap: 20,
+        fontFamily: "inherit", color: p.ink,
+        transition: "background 0.3s",
+      }}>
+        <span style={{
+          fontFamily: '"Noto Serif TC", serif', fontSize: 18,
+          color: p.accent, fontWeight: 700, letterSpacing: "0.05em", minWidth: 32,
+        }}>{badge}</span>
+        <span style={{
+          flex: 1, fontFamily: '"Noto Serif TC", serif',
+          fontSize: 24, fontWeight: 700, letterSpacing: "0.02em",
+        }}>{title}</span>
+        <span style={{
+          width: 36, height: 36, borderRadius: "50%",
+          border: `1.5px solid ${p.accent}`, color: p.accent,
+          display: "inline-flex", alignItems: "center", justifyContent: "center",
+          transform: open ? "rotate(45deg)" : "rotate(0deg)",
+          transition: "transform 0.3s",
+          fontSize: 22, lineHeight: 1, fontWeight: 300,
+        }}>+</span>
+      </button>
+      <div style={{
+        maxHeight: open ? "2000px" : "0",
+        overflow: "hidden",
+        transition: open ? "max-height 0.6s ease-in" : "max-height 0.3s ease-out",
+        background: open ? p.cream : "transparent",
+      }}>
+        <div style={{ padding: "0 28px 28px 80px" }}>{children}</div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Section 包裝 ──────────────────────────────────
+function CraftSection({ num, title, hand, p, children }) {
+  return (
+    <section style={{ padding: "60px 80px", borderTop: `1.5px dashed ${p.line}` }}>
+      <div style={{ marginBottom: 44, display: "flex", alignItems: "baseline", gap: 28 }}>
+        <div style={{
+          fontFamily: '"Noto Serif TC", serif',
+          fontSize: 64, fontWeight: 900, color: p.accent, lineHeight: 1,
+        }}>{num}</div>
+        <div>
+          <h2 style={{ fontFamily: '"Noto Serif TC", serif', fontSize: 44, fontWeight: 700, margin: "0 0 8px", lineHeight: 1.2 }}>
+            {title}
+          </h2>
+          <div style={{ fontFamily: "Caveat, cursive", fontSize: 28, color: p.accent2, fontWeight: 700 }}>
+            {hand}
+          </div>
+        </div>
+      </div>
+      {children}
+    </section>
+  );
+}
+
+// ─── 主元件 ProposalCraft (B 版本，手作札記，字級加大) ──────────────────────────────────
+const craftPalette = {
+  bg: "#F7F1E3",
+  paper: "#FFFCF5",
+  cream: "#F0E6D2",
+  ink: "#3A2E2A",
+  inkSoft: "#6B5C50",
+  accent: "#D87447",
+  accent2: "#7A9560",
+  accent3: "#E8B854",
+  accent4: "#5B7B8A",
+  postit: "#FFE89B",
+  line: "rgba(58,46,42,0.2)",
+  lineSoft: "rgba(58,46,42,0.1)",
+};
+
+function ProposalCraft() {
+  const p = craftPalette;
+  return (
+    <div style={{
+      width: "100%",
+      maxWidth: 1080,
+      background: p.bg,
+      color: p.ink,
+      fontFamily: '"Noto Sans TC", system-ui, sans-serif',
+      fontSize: 19,
+      lineHeight: 1.85,
+      position: "relative",
+      backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(58,46,42,0.04) 31px, rgba(58,46,42,0.04) 32px)`,
+    }}>
+      {/* HERO */}
+      <section style={{ padding: "64px 80px 60px", position: "relative" }}>
+        <div style={{ position: "absolute", top: 28, right: 80, width: 140, height: 32, background: p.accent, opacity: 0.85, transform: "rotate(8deg)", boxShadow: "0 2px 4px rgba(0,0,0,0.08)" }}/>
+        <div style={{ position: "absolute", top: 32, right: 88, fontFamily: "Caveat, cursive", fontSize: 22, color: "#fff", transform: "rotate(8deg)", fontWeight: 700 }}>
+          2026 春
+        </div>
+
+        <div style={{ fontFamily: "Caveat, cursive", fontSize: 38, color: p.accent, fontWeight: 700, marginBottom: 12, transform: "rotate(-1deg)" }}>
+          一個四方都受益的小計畫 ✦
+        </div>
+
+        <h1 style={{
+          fontFamily: '"Noto Serif TC", serif',
+          fontSize: 92, lineHeight: 1.1,
+          fontWeight: 900, margin: "20px 0 20px",
+          letterSpacing: "-0.01em", color: p.ink,
+        }}>
+          銀髮族 <span style={{ position: "relative", display: "inline-block", color: p.accent }}>
+            說故事
+            <svg width="100%" height="16" viewBox="0 0 260 16" style={{ position: "absolute", left: 0, bottom: -6 }}>
+              <path d="M2,9 Q70,3 130,8 T258,7" stroke={p.accent3} strokeWidth="7" fill="none" strokeLinecap="round" opacity="0.75"/>
+            </svg>
+          </span><br/>
+          走進校園資源班
+        </h1>
+
+        <div style={{
+          display: "inline-flex", alignItems: "center", gap: 14,
+          padding: "12px 22px",
+          background: p.cream,
+          border: `1.5px dashed ${p.ink}`,
+          borderRadius: 999,
+          fontSize: 17, color: p.ink,
+          marginTop: 8,
+          lineHeight: 1.6,
+        }}>
+          <span style={{ fontFamily: "Caveat, cursive", fontSize: 24, color: p.accent2, fontWeight: 700 }}>p.s.</span>
+          <span>長輩是主角,<b>說故事</b>是核心——<span style={{ color: p.accent, fontWeight: 700 }}>AI 在後台輔助</span>(修順故事、生成繪本、投影場景)</span>
+        </div>
+
+        <div style={{
+          marginTop: 44,
+          padding: "32px 36px",
+          background: p.paper,
+          border: `1.5px solid ${p.ink}`,
+          borderRadius: 4,
+          boxShadow: `5px 5px 0 ${p.accent3}`,
+          maxWidth: 880,
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14, fontFamily: "Caveat, cursive", fontSize: 26, color: p.accent2, fontWeight: 700 }}>
+            <span style={{ width: 22, height: 2, background: p.accent2 }}/> 一句話
+          </div>
+          <p style={{ fontFamily: '"Noto Serif TC", serif', fontSize: 26, lineHeight: 1.8, margin: 0, color: p.ink }}>
+            讓銀髮族走進資源班,<b style={{ color: p.accent }}>每次半小時</b>,由長輩說一段故事。<br/>
+            孩子被聽見、長輩有舞台、學校多一份外部資源、社區多一條代間共學的橋。
+          </p>
+          <p style={{ fontSize: 17, lineHeight: 1.85, margin: "18px 0 0", color: p.inkSoft, paddingTop: 16, borderTop: `1px dashed ${p.lineSoft}` }}>
+            <b style={{ color: p.ink }}>關於 AI:</b>它不在現場、也不直接給孩子用。它是長輩的後台支援——幫忙把故事修順、生成繪本畫面、把場景投影出來,讓準備變簡單、現場變流暢。
+          </p>
+        </div>
+
+        <div style={{ marginTop: 36, display: "flex", gap: 18, alignItems: "center", fontFamily: "Caveat, cursive", fontSize: 24, color: p.inkSoft }}>
+          <span>by</span>
+          <span style={{ color: p.ink, fontWeight: 700 }}>江昱德</span>
+          <span>·</span>
+          <span style={{ color: p.ink, fontWeight: 700 }}>林學賢</span>
+        </div>
+      </section>
+
+      {/* 01 為什麼 */}
+      <CraftSection num="01" title="為什麼做這件事" hand="同時看到三個現象" p={p}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 22 }}>
+          {PROPOSAL_DATA.pillars.map((pillar, i) => {
+            const tints = [p.accent, p.accent2, p.accent4];
+            const handLabels = ["第一", "第二", "第三"];
+            const rotations = [-1.5, 0.8, -0.5];
+            return (
+              <div key={pillar.key} style={{
+                background: p.paper,
+                padding: "30px 26px 32px",
+                border: `1.5px solid ${p.ink}`,
+                borderRadius: 6,
+                boxShadow: `3px 3px 0 ${tints[i]}`,
+                transform: `rotate(${rotations[i]}deg)`,
+              }}>
+                <div style={{ fontFamily: "Caveat, cursive", fontSize: 32, color: tints[i], fontWeight: 700, marginBottom: 6 }}>
+                  {handLabels[i]}
+                </div>
+                <h3 style={{ fontFamily: '"Noto Serif TC", serif', fontSize: 26, fontWeight: 700, margin: "0 0 16px", lineHeight: 1.4 }}>{pillar.label}</h3>
+                <div style={{ width: 36, height: 2.5, background: tints[i], marginBottom: 16 }}/>
+                <p style={{ margin: "0 0 14px", fontSize: 17, lineHeight: 1.85 }}>{pillar.summary}</p>
+                <p style={{ margin: 0, fontSize: 16, lineHeight: 1.85, color: p.inkSoft }}>{pillar.detail}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        <div style={{
+          marginTop: 60, padding: "44px 48px",
+          background: p.ink, color: p.paper, borderRadius: 6,
+          backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0)",
+          backgroundSize: "12px 12px",
+        }}>
+          <div style={{ fontFamily: "Caveat, cursive", fontSize: 30, color: p.accent3, fontWeight: 700, marginBottom: 16 }}>
+            把三個接起來 →
+          </div>
+          <p style={{ fontFamily: '"Noto Serif TC", serif', fontSize: 30, lineHeight: 1.7, margin: 0, fontWeight: 500 }}>
+            從一段故事開始,<span style={{ color: p.accent3 }}>慢慢練習怎麼做選擇。</span>
+          </p>
+        </div>
+      </CraftSection>
+
+      {/* 02 方案 */}
+      <CraftSection num="02" title="這個方案要做什麼" hand="三個層次的設計" p={p}>
+        <div style={{ display: "grid", gap: 18 }}>
+          {PROPOSAL_DATA.layers.map((layer, i) => (
+            <div key={layer.no} style={{
+              background: p.paper,
+              border: `1.5px solid ${p.ink}`, borderRadius: 6,
+              boxShadow: "2px 2px 0 rgba(58,46,42,0.15)",
+            }}>
+              <CollapsibleLG
+                badge={layer.no}
+                title={layer.title}
+                defaultOpen={i === 0}
+                p={p}
+              >
+                <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
+                  {layer.bullets.map((b, j) => (
+                    <li key={j} style={{
+                      padding: "12px 0 12px 30px", position: "relative",
+                      fontSize: 18, lineHeight: 1.85,
+                    }}>
+                      <span style={{
+                        position: "absolute", left: 0, top: 14,
+                        fontFamily: "Caveat, cursive", color: p.accent2, fontWeight: 700, fontSize: 24,
+                      }}>✓</span>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </CollapsibleLG>
+            </div>
+          ))}
+        </div>
+      </CraftSection>
+
+      {/* 03 效益 */}
+      <CraftSection num="03" title="預期效益" hand="四方共贏" p={p}>
+        <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: 44, alignItems: "center", marginBottom: 52 }}>
+          <div style={{
+            background: p.paper, padding: "24px", borderRadius: 6,
+            border: `1.5px solid ${p.ink}`, boxShadow: `3px 3px 0 ${p.accent2}`,
+          }}>
+            <FourWayDiagram palette={{
+              kids: p.accent, elders: p.accent2, ai: p.accent4, school: p.accent3,
+              line: p.ink, text: p.ink,
+            }}/>
+          </div>
+          <div>
+            <div style={{ fontFamily: "Caveat, cursive", fontSize: 34, color: p.accent, fontWeight: 700, marginBottom: 10 }}>
+              ✦ 孩子是中心
+            </div>
+            <h3 style={{ fontFamily: '"Noto Serif TC", serif', fontSize: 34, fontWeight: 700, margin: "0 0 18px", lineHeight: 1.4 }}>
+              不是單向幫助,<br/>是會自己長大的系統
+            </h3>
+            <p style={{ fontSize: 18, lineHeight: 1.9, color: p.ink, margin: 0 }}>
+              一場故事,連起四個角色。每個角色都有自己的位置、自己的得到。
+            </p>
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }}>
+          {PROPOSAL_DATA.benefits.map((b, i) => {
+            const tints = [p.accent, p.accent2, p.accent3, p.accent4];
+            const rots = [-0.8, 0.6, 0.4, -0.6];
+            return (
+              <div key={i} style={{
+                background: i === 0 ? p.postit : p.paper,
+                padding: "28px 30px",
+                border: `1.5px solid ${p.ink}`, borderRadius: 6,
+                boxShadow: `2px 2px 0 ${tints[i]}`,
+                transform: `rotate(${rots[i]}deg)`,
+              }}>
+                <div style={{ display: "flex", alignItems: "baseline", gap: 14, marginBottom: 16 }}>
+                  <h4 style={{ fontFamily: '"Noto Serif TC", serif', fontSize: 28, fontWeight: 700, margin: 0, color: tints[i] }}>{b.who}</h4>
+                  <span style={{ fontFamily: "Caveat, cursive", fontSize: 20, color: p.inkSoft }}>· {b.sub}</span>
+                </div>
+                <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
+                  {b.points.map((pt, j) => (
+                    <li key={j} style={{
+                      padding: "7px 0 7px 22px", position: "relative",
+                      fontSize: 17, lineHeight: 1.8,
+                    }}>
+                      <span style={{ position: "absolute", left: 0, top: 14, width: 9, height: 9, background: tints[i], borderRadius: "50%", opacity: 0.7 }}/>
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* 知識庫 */}
+        <div style={{
+          marginTop: 60, padding: "44px 48px",
+          background: p.cream, border: `1.5px solid ${p.ink}`, borderRadius: 6,
+          boxShadow: `4px 4px 0 ${p.accent}`,
+        }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 44, alignItems: "center" }}>
+            <div>
+              <div style={{ fontFamily: "Caveat, cursive", fontSize: 30, color: p.accent, fontWeight: 700, marginBottom: 8 }}>
+                整體永續性
+              </div>
+              <h3 style={{ fontFamily: '"Noto Serif TC", serif', fontSize: 36, fontWeight: 700, margin: "0 0 20px", lineHeight: 1.35 }}>
+                會持續累加的<br/>共享知識庫
+              </h3>
+              <p style={{ fontSize: 17.5, lineHeight: 1.95, color: p.ink, margin: "0 0 14px" }}>
+                每一場故事、每一段討論、每一個現場狀況,都會被收進共享知識庫。
+              </p>
+              <p style={{ fontFamily: "Caveat, cursive", fontSize: 28, color: p.ink, margin: 0, fontWeight: 700 }}>
+                上一次的累積 = 下一次的養分 ✦
+              </p>
+            </div>
+            <KnowledgeStackLG palette={{ primary: p.accent, text: p.ink, line: p.ink }}/>
+          </div>
+        </div>
+      </CraftSection>
+
+      {/* 04 執行 */}
+      <CraftSection num="04" title="執行架構" hand="角色分工" p={p}>
+        <div style={{ display: "grid", gap: 14 }}>
+          {PROPOSAL_DATA.roles.map((r, i) => {
+            const tints = [p.accent, p.accent2, p.accent4, p.accent3, p.inkSoft];
+            return (
+              <div key={i} style={{
+                display: "grid", gridTemplateColumns: "auto 200px 1fr", gap: 22,
+                padding: "20px 26px", alignItems: "center",
+                background: p.paper,
+                border: `1.5px solid ${p.ink}`, borderRadius: 6,
+                boxShadow: `2px 2px 0 ${tints[i]}`,
+              }}>
+                <div style={{
+                  width: 44, height: 44, borderRadius: "50%",
+                  background: tints[i], color: "#fff",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontFamily: "Caveat, cursive", fontSize: 24, fontWeight: 700,
+                }}>{i + 1}</div>
+                <div style={{ fontFamily: '"Noto Serif TC", serif', fontSize: 22, fontWeight: 700, color: p.ink }}>{r.role}</div>
+                <div style={{ fontSize: 17, lineHeight: 1.8, color: p.ink }}>{r.duty}</div>
+              </div>
+            );
+          })}
+        </div>
+      </CraftSection>
+
+      {/* 結尾 */}
+      <section style={{ padding: "76px 80px 92px", textAlign: "center" }}>
+        <div style={{ fontFamily: "Caveat, cursive", fontSize: 42, color: p.accent, fontWeight: 700, marginBottom: 18 }}>
+          ✦ 一起開始 ✦
+        </div>
+        <p style={{ fontFamily: '"Noto Serif TC", serif', fontSize: 28, lineHeight: 1.7, margin: 0, color: p.ink, maxWidth: 760, marginInline: "auto" }}>
+          讓阿公阿嬤、AI、孩子、學校,<br/>四方都成為這個故事裡的主角。
+        </p>
+        <div style={{ marginTop: 40, fontSize: 16, color: p.inkSoft, letterSpacing: "0.15em" }}>
+          提案 · 江昱德 / 林學賢　|　永力扶輪社
+        </div>
+      </section>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <div className="page-wrap"><ProposalCraft /></div>
+);
+</script>
+</body>
+</html>
